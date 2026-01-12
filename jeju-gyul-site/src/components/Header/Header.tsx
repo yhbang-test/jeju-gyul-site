@@ -1,12 +1,12 @@
 export default function Header() {
   return (
-    <header>
-      <h1>JEJU GYUL</h1>
+    <header className="header">
+      <h1 className="header-logo">JEJU GYUL</h1>
 
-      <nav>
+      <nav className="header-nav">
         <ul>
           <li>
-            소개
+            역사
             <ul>
               <li>브랜드 소개</li>
               <li>제주 이야기</li>
@@ -14,7 +14,7 @@ export default function Header() {
           </li>
 
          <li>
-          <a href="#products">귤 소개</a>
+          <a>귤 소개</a>
           <ul>
             <li>한라봉</li>
             <li>레드향</li>
