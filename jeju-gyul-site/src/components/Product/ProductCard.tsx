@@ -6,12 +6,19 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   return (
+  <section className="product-section">  
     <div className="product-card">
-      {product.image && (
-        <img src={product.image} alt={product.name} />
-      )}
-      <h3>{product.name}</h3>
-      <p>{product.description}</p>
+      <div className="product-image-side">
+        {product.image && (
+          <img src={product.image} alt={product.name} />
+        )}
+      </div>
+
+      <div className="product-text-side">
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+      </div>
     </div>
+  </section>  
   )
 }

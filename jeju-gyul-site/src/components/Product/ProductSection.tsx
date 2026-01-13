@@ -1,6 +1,6 @@
 import type { Product } from '../../types/product'
 import ProductCard from './ProductCard'
-import mainHalla from '../../assets/mainhalla.jpg'
+import mainHalla from '../../assets/AIHalla.jpg'
 import mainRedHalla from '../../assets/redhalla.jpg'
 import mainChanHalla from '../../assets/chanhalla.jpg'
 const products: Product[] = [
@@ -27,8 +27,6 @@ const products: Product[] = [
 export default function ProductSection() {
   return (
     <section>
-      <h2>귤 소개</h2>
-
       {products.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}
