@@ -6,7 +6,6 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   return (
-  <section className="product-section">  
     <div className="product-card">
       <div className="product-image-side">
         {product.image && (
@@ -19,6 +18,5 @@ export default function ProductCard({ product }: Props) {
         <p>{product.description}</p>
       </div>
     </div>
-  </section>  
   )
 }

@@ -2,6 +2,8 @@ import './App.css'
 import Header from './components/Header/Header'
 import HeroSection from './components/Hero/HeroSection'
 import ProductSection from './components/Product/ProductSection'
+import EventSection from './components/Event/EventSection'
+
 
 function App() {
 
@@ -10,6 +12,7 @@ function App() {
       <Header />
       <HeroSection />
       <ProductSection />
+      <EventSection />
       <h1>Jeju Gyul Site</h1>
     </>
   )

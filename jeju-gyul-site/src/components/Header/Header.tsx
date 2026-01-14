@@ -14,17 +14,22 @@ export default function Header() {
           </li>
 
          <li>
-          <a>귤 소개</a>
+          귤 소개
           <ul>
-            <li>한라봉</li>
+            <li><a href="mainHalla">한라봉</a></li>
             <li>레드향</li>
             <li>천혜향</li>
           </ul>
-         
          </li>
+
           <li>주문</li>
-          <li>AS</li>
-          <li>추후추가</li>
+          
+          <li>AS
+           <ul>
+            <li>게시판</li>
+            <li>QA</li>
+           </ul>
+           </li> 
         </ul>
       </nav>
     </header>

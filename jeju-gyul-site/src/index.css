@@ -6,7 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -132,7 +132,7 @@ button:focus-visible {
 /* 2차 메뉴 */
 .header-nav ul li ul {
   position: absolute;
-  top: 140%;
+  top: 100%;
   left: 0;
   background: #ffffffef;
   padding: 12px 0;
@@ -171,88 +171,83 @@ button:focus-visible {
   color: #2D5A27;
 }
 /* -------------------------------------------------------------------------- */
-.section {
+/* 1. 배경 섹션 (전체 너비 100% 보장) */
+.hero-section {
+  width: 100% !important; 
   height: 100vh;
-  width: 100%;
-  padding: 0;   /* 헤더 아래 여백 */
-  box-sizing: border-box;
-}
-.section.history {
-  height: 100vh;
-  width: 100vw;
   background-size: cover;
   background-position: center;
   display: flex;
-  flex-direction: column;
-  /* 가로 세로 정중앙 배치 */
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  text-align: center;
-  
-  /* 중요: 기존 padding 120px 96px; 때문에 아래로 밀렸던 것을 제거합니다 */
-  padding: 0 20px; 
-  
-  /* 중앙에서 약간 위로 올리고 싶을 때 사용하는 팁 */
-  padding-bottom: 5vh; 
-}
-.section.products {
-  background: #fff7ed;   /* 감귤 껍질 톤 */
+  margin: 0;
+  padding: 0;
 }
 
-/* 제목 스타일 수정 */
-.section h2 {
-  font-size: 80px;
-  font-family: 'Times New Roman', Times, serif;
-  color: #ff7a00;
-  /* 기존 margin-bottom: 40px;가 너무 넓다면 20px 정도로 줄입니다 */
-  margin-bottom: 60px; 
+/* 2. 타이틀 (색상이 안 먹는다면 !important 추가) */
+.hero-title {
+  /* 80px보다 더 크게 보고 싶다고 하셨으니 120px로 설정 */
+  font-size: clamp(40px, 3vw, 800px) ; 
+  font-family: 'Times New Roman', serif;
+  color: #ff7a00; /* 오렌지색 강제 적용 */
+  margin-bottom: 60px;
   position: relative;
+  font-weight: 900;
 }
 
-/* 제목 밑의 오렌지 라인을 중앙으로 */
-/* 오렌지 라인 중앙 정렬 */
-.section h2::after {
+/* 오렌지 밑줄 */
+.hero-title::after {
   content: "";
   position: absolute;
   bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 5px;
-  background: #ff7a00;
+  width: 150px; /* 글자가 커졌으니 선도 길게 */
+  height: 6px;
+  background: #ff7a00 !important;
 }
 
-/* 본문 텍스트 스타일 */
-/* 텍스트들 사이의 간격 조정 */
-/* 본문 텍스트 스타일 공통 */
-.section p {
-  color: white;
-  line-height: 1.6;
-  word-break: keep-all; /* 단어 단위 줄바꿈 */
-}
-/* 상단 문구: 한라산 바람과 햇살... */
-.section p.sub-title {
-  font-size: 2rem;   /* 크기 키움 */
-  font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
-  margin-top: 40px;    /* 제목과 거리를 둬서 아래로 내림 */
-  opacity: 0.9;
+/* 3. 서브 텍스트 */
+.hero-subtitle {
+  color: white !important;
+  font-size: 2.3rem;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  font-family: 'Times New Roman', 'Noto Serif KR', serif;
 }
 
-/* 하단 문구: 한라봉, 레드향... */
-.section p.description {
-  font-size: 1.5rem;  /* 살짝 작게 해서 밸런스 유지 */
-  margin-top: 10px;
-  font-weight: 300;
-  opacity: 0.8;
+.hero-description {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 1rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* ---------------------------------------------------------------------------- */
 
 /* 제품 섹션 배경 및 여백 */
 .product-section {
-  padding: 100px 5%;
-  background-color: #dfd7d7; /* 아주 연한 귤색 배경 */
+  position: relative;
+  width: 100%; /* 이제 100vw 대신 100%만 써도 됩니다 */
+  padding: 100px 0; /* 위아래 여백만 주고 좌우 패딩은 컨테이너에 맡김 */
+  background-color: #dfd7d7; 
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 자식 요소들을 가로 중앙으로 */
+  overflow: hidden;
+}
+
+.product-section::before {
+  content: 'JEJU'; /* 글자로 테스트 */
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  font-size: 150px;
+  font-weight: 900;
+  color: #2D5A27;
+  opacity: 0.05; /* 아주 연하게 해서 자투리 공간 채우기 */
+  transform: rotate(-10deg);
+  pointer-events: none;
 }
 
 /* 카드 스타일: 가로 배치 */
@@ -262,7 +257,7 @@ button:focus-visible {
   margin-bottom: 25px;
   border-radius: 12px;
   overflow: hidden; /* 이미지가 튀어나오지 않게 */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.07);
   transition: all 0.3s ease;
   padding: 50px; /* 카드 안쪽 전체 여백 */
   background:
@@ -285,6 +280,7 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover; /* 사진이 비율에 맞춰 꽉 차게 */
+  border-radius: 12px;
 }
 
 /* 텍스트 영역: 남은 공간 모두 차지 */
@@ -309,4 +305,79 @@ button:focus-visible {
   line-height: 1.8;
   margin: 0;         /* 기본 마진 제거 */
   word-break: keep-all;
+  white-space: pre-wrap;
+}
+
+/* ----------------------------------------- */
+
+/* 이벤트 전용 섹션 */
+.event-section {
+  padding: 120px 0;
+  background-color: #f98920; /* 브랜드 메인 오렌지 컬러 */
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 배경에 은은한 귤 패턴 넣기 (선택 사항) */
+.event-section::before {
+  content: '🍊';
+  position: absolute;
+  font-size: 200px;
+  opacity: 0.1;
+  top: -50px;
+  right: -50px;
+  transform: rotate(20deg);
+}
+
+.event-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.event-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.event-title {
+  font-size: 42px;
+  font-family: 'Times New Roman', 'Noto Serif KR', serif; /* 클래식한 느낌 유지 */
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+.event-desc {
+  font-size: 20px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  white-space: pre-wrap; /* 줄바꿈 허용 */
+}
+
+/* 강조 버튼 */
+.event-button {
+  padding: 18px 45px;
+  background: white;
+  color: #fd881a;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.event-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
