@@ -1,35 +1,25 @@
+import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <header className="header">
-      <h1 className="header-logo">JEJU GYUL</h1>
+      <h1 className="header-logo">
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>JEJU GYUL</Link>
+      </h1>
 
       <nav className="header-nav">
         <ul>
-          <li>
-            역사
+          {/* href="#id" 형식을 사용하여 이동할 위치를 지정합니다 */}
+          <li><a href="#home">소개</a></li>
+          <li><a href="#products">귤 소개</a></li>
+          <li><a href="#event">이벤트</a></li>
+          <li><Link to="/order">주문</Link></li>
+          <li className="dropdown">
+            소통해요
             <ul>
-              <li>브랜드 소개</li>
-              <li>제주 이야기</li>
+              <li>게시판</li>
+              <li>QA</li>
             </ul>
-          </li>
-
-         <li>
-          귤 소개
-          <ul>
-            <li><a href="mainHalla">한라봉</a></li>
-            <li>레드향</li>
-            <li>천혜향</li>
-          </ul>
-         </li>
-
-          <li>주문</li>
-          
-          <li>AS
-           <ul>
-            <li>게시판</li>
-            <li>QA</li>
-           </ul>
-           </li> 
+          </li> 
         </ul>
       </nav>
     </header>

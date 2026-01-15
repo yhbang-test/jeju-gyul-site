@@ -74,6 +74,12 @@ button:focus-visible {
 }
 /* ---------------------------------------------------------------------------- */
 /* 전체 헤더 */
+
+/* --- 3. 기존 헤더 스타일 보완 --- */
+/* 고정 헤더 때문에 섹션 제목이 가려지는 것 방지 */
+section {
+  scroll-margin-top: 70px; /* 헤더 높이(70px)만큼 여유 공간 확보 */
+}
 .header {
   position: fixed;
   top: 0;
@@ -103,6 +109,13 @@ button:focus-visible {
 /* nav 전체 */
 .header-nav {
   grid-column: 2;
+}
+
+.header-nav a {
+  text-decoration: none;  /* 밑줄 제거 */
+  color: inherit;         /* 부모(li) 색상 따라가기 */
+  display: block;         /* 클릭 영역을 넓게 */
+  width: 100%;
 }
 
 .header-nav ul {
@@ -170,6 +183,17 @@ button:focus-visible {
   background: #f0f5ee;
   color: #2D5A27;
 }
+
+/* '소통해요' 메뉴와 서브메뉴 사이의 다리 역할 (선택사항이지만 추천) */
+.header-nav ul li.dropdown::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+}
+
 /* -------------------------------------------------------------------------- */
 /* 1. 배경 섹션 (전체 너비 100% 보장) */
 .hero-section {
@@ -380,4 +404,51 @@ button:focus-visible {
 .event-button:hover {
   transform: scale(1.05);
   box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/*---------------------------------------------------  */
+
+.footer {
+  background-color: #2D5A27; /* 아까 쓴 나뭇잎색과 통일감 */
+  color: rgba(255, 255, 255, 0.8);
+  padding: 60px 5% 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-logo {
+  color: #ff7a00;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-info h3 {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.footer-info .phone {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff7a00;
+  margin-bottom: 10px;
+}
+
+.footer-details p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.copyright {
+  margin-top: 20px !important;
+  opacity: 0.5;
 }

@@ -1,0 +1,86 @@
+:root{
+  /* 1. 폰트 설정 (Pretendard: 깔끔하고 가독성 좋음) */
+/* @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');   */
+}
+.order-page {
+  padding: 120px 20px;
+  background-color: #84c882;
+  min-height: 100vh;
+}
+
+.order-header { text-align: center; margin-bottom: 50px; }
+.order-header h1 { font-size: 3rem; color: #333; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+
+.form-group {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.form-group h3 { margin-bottom: 50px; 
+                 color: #2D5A27;
+                 font-size: 50px;
+                 text-align: center; 
+                 font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
+
+/* 큰 아이콘 카드 그리드 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  background-color: rgba(232, 231, 231, 0.875);
+  border-radius: 15px;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 애니메이션 속도 */
+  
+  /* 부드러운 기본 그림자 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. 마우스를 올렸을 때(Hover) 그림자가 더 진해지는 효과 */
+.product-card:hover {
+  transform: translateY(-5px); /* 살짝 떠오르는 느낌 */
+  box-shadow: 0 15px 30px rgba(255, 122, 0, 0.15); /* 오렌지빛 도는 진한 그림자 */
+  border-color: #ff7a00;
+}
+
+.product-card .product-icon { font-size: 50px; margin-bottom: 10px; }
+.product-card.active {
+  border: 2px solid #ff7a00;
+  box-shadow: 0 10px 25px rgba(255, 122, 0, 0.2);
+}
+
+/* 입력창 스타일 */
+.input-list input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* 버튼 그룹 */
+.button-group { display: flex; gap: 15px; margin-top: 40px; }
+
+.order-btn {
+  flex: 1;
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.order-btn.primary { background: #ff7a00; color: white; }
+.order-btn.cancel { background: #eee; color: #666; }
