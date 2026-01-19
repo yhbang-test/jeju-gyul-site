@@ -1,34 +1,53 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+
+// 컴포넌트 임포트
 import Header from './components/Header/Header'
 import HeroSection from './components/Hero/HeroSection'
 import ProductSection from './components/Product/ProductSection'
 import EventSection from './components/Event/EventSection'
 import Footer from './components/Footer/Footer'
 import OrderPage from './components/Order/OrderPage'
+import LoginPage from './components/Login/LoginPage';
+import BoardPage from './components/Board/BoardPage';
 
 function App() {
+  const [userName, setUserName] = useState<string | null>(null);
+
+  // 로그인 성공 시 실행할 함수
+  const handleLoginTest = () => {
+    setUserName("ㅁㄴㅇ"); 
+  };
+
+  const handleLogout = () => {
+    setUserName(null); 
+  };
+
   return (
     <Router>
-      <Header />
-
+      {/* 1. 공통 헤더 */}
+      <Header userName={userName} onLogout={handleLogout} />
+      
       <Routes>
-        {/* 1. 메인 페이지: 기존 섹션들을 모두 여기에 모읍니다. */}
+        {/* 2. 메인 페이지 (MainPage 컴포넌트 대신 직접 섹션 조립) */}
         <Route path="/" element={
           <>
             <HeroSection />
             <ProductSection />
             <EventSection />
           </>
-        } />
-
-        {/* 2. 주문 페이지: 클릭 시 이동할 새 화면 */}
-        <Route path="/order" element={<OrderPage />} />
+        }/>
+        <Route path="/board" element={<BoardPage />} />
+        {/* 3. 주문 페이지 */}
+        <Route path="/order" element={<OrderPage userName={userName} />} />
+        {/* 4. 로그인 페이지 (함수 전달) */}
+        <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginTest} />} />
       </Routes>
-
+      {/* 5. 공통 푸터 */}
       <Footer />
     </Router>
   );
 }
 
-export default App
+export default App;

@@ -1,0 +1,47 @@
+.board-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 150px 20px 100px; /* 헤더 높이만큼 위 여백 */
+}
+
+.board-container h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.board-table {
+  width: 100%;
+  border-top: 2px solid #ff7a00;
+  border-collapse: collapse;
+}
+
+.board-table th {
+  padding: 15px;
+  background-color: #fffaf5;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.board-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  transition: background 0.2s;
+}
+
+.board-table tr:hover td {
+  background-color: #fffcf9;
+  color: #ff7a00;
+}
+
+.write-btn {
+  background-color: #ff7a00;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
