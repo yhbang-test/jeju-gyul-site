@@ -1,117 +1,99 @@
+/* index.css */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+  box-sizing: border-box; /* 모든 박스 계산을 테두리 기준으로 고정 */
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
   color: #213547;
   background-color: #ffffff;
+  /* 🔥 삭제: display: flex와 min-height는 여기서 쓰면 모든 페이지가 꼬입니다. */
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
+html, body {
+  width: 100%;
   min-height: 100vh;
-}
-
-.order-page, 
-.login-page-container, 
-.board-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.write-form {
-  margin-bottom: 30px;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
   margin: 0;
   padding: 0;
-  display: block; 
-  width: 100%;
-  min-width: 320px;
-  min-height: 100vh;
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* 전역 버튼 초기화: 개별 페이지 CSS가 먹히도록 배경색을 뺍니다 */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  border: none;
+  background: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* index.css 하단에 추가 또는 확인 */
+html {
+  scroll-behavior: smooth; /* 이 속성이 있어야 부드럽게 내려갑니다 */
+}
+
+/* 헤더가 fixed이므로, 스크롤될 지점이 헤더에 가려지지 않게 간격(Offset)을 줍니다 */
+section {
+  scroll-margin-top: 80px; /* 헤더 높이(80px)만큼 덜 내려가게 설정 */
+}
 /* ---------------------------------------------------------------------------- */
 /* 전체 헤더 */
 
-/* --- 1. 헤더 전체 컨테이너 (정렬의 기준) --- */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px; /* 고정 높이 */
+  height: 80px; 
   display: flex;
   justify-content: space-between;
-  align-items: center; /* 모든 요소를 세로 중앙으로 */
+  align-items: center; 
   padding: 0 4.5%;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  z-index: 1000;
-  box-sizing: border-box;
+  z-index: 2000; /* 모든 콘텐츠 위에 고정 */
 }
 
-/* --- 2. 로고 영역 --- */
-.header-logo a {
-  text-decoration: none;
-  color: #2D5A27; /* 진한 숲색 */
+/* 로고 영역 */
+.header-logo {
   font-size: 27px;
   font-weight: 800;
+  color: #2D5A27;
   letter-spacing: -0.01em;
 }
 
 .header-logo span {
-  color: #ff7a00; /* GYUL 오렌지 포인트 */
+  color: #ff7a00;
 }
 
-/* --- 3. 네비게이션 메뉴 영역 --- */
+/* 네비게이션 메뉴 (나열형 최적화) */
 .header-nav {
+  height: 100%;
   display: flex;
   align-items: center;
-  height: 100%;
 }
 
 .header-nav ul {
   display: flex;
   align-items: center;
-  gap: 45px;
+  gap: 35px; /* 메뉴 개수가 늘어났으므로 간격을 45px -> 35px로 살짝 좁혔습니다 */
   list-style: none;
-  margin: 0;
-  padding: 0;
   height: 100%;
 }
 
@@ -119,156 +101,60 @@ button:focus-visible {
   display: flex;
   align-items: center;
   height: 100%;
-  position: relative; /* 드롭다운의 기준점 */
-  font-size: 18px;
+  font-size: 17px; /* 18px에서 17px로 살짝 줄여 시각적 여백 확보 */
   font-weight: 600;
   color: #444;
-  transition: color 0.2s ease;
-}
-
-.header-nav > ul > li a {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  height: 100%;
+  transition: color 0.2s;
 }
 
 .header-nav > ul > li:hover {
-  color: #ff7a00;
+  color: #ff7a00; /* 마우스 올렸을 때 색상 변화 */
 }
 
-/* --- 4. 드롭다운 라벨 및 화살표 --- */
-.dropdown-label {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.dropdown-label::after {
-  content: '▾';
-  font-size: 10px;
-  margin-left: 5px;
-  opacity: 0.5;
-}
-
-/* --- 5. 드롭다운 메뉴 (세로 정렬 및 깨짐 방지 핵심) --- */
-.dropdown-menu {
-  position: absolute;
-  /* 부모 li가 height 100%(80px)이므로 top 100%를 주면 정확히 헤더 아래에 붙습니다 */
-  top: 100%; 
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: white;
-  
-  /* 내부 아이템 세로 정렬 */
-  display: flex;
-  
-  min-width: 150px; /* 글자가 갇히지 않게 충분한 너비 확보 */
-  padding: 10px 0;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 1001;
-}
-
-/* 호버 시 드롭다운 표시 */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
-}
-
-.dropdown-menu li {
-  width: 100%;
-  list-style: none;
-}
-
-.dropdown-menu li a {
-  display: block; /* 전체 영역 클릭 */
-  padding: 12px 20px;
-  font-size: 15px;
-  color: #666;
-  text-decoration: none;
-  text-align: center;
-  
-  /* 🔥 핵심: 글자 꺾임 방지 */
-  white-space: nowrap; 
-  transition: all 0.2s;
-}
-
-.dropdown-menu li a:hover {
-  background: #fff5eb;
-  color: #ff7a00;
-  font-weight: 700;
-}
-
-/* --- 6. 오른쪽 사용자 영역 (로그인/로그아웃) --- */
+/* 오른쪽 사용자 영역 */
 .header-right {
   display: flex;
   align-items: center;
+  gap: 15px;
 }
 
 .welcome-msg {
   font-size: 14px;
   color: #666;
-  margin-right: 15px;
-}
-
-.welcome-msg strong {
-  color: #222;
-  font-weight: 700;
-}
-
-.logout-btn {
-  background: #f5f5f5;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #888;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.logout-btn:hover {
-  background: #ffebe6;
-  color: #ff4d4d;
 }
 
 .login-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* 날씬하고 세련된 높이 40px */
-  height: 40px; 
-  padding: 0 25px; 
-  
+  height: 42px;
+  padding: 0 25px;
   background: #ff7a00;
   color: white !important;
   border-radius: 50px;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.15);
-  white-space: nowrap;
 }
 
-.login-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3);
+.logout-btn {
+  background: #f5f5f5;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
 }
 
+/* --- 로그인 버튼 전용 스타일 --- */
+.login-item {
+  margin-left: 20px; /* 주문 메뉴와 간격 벌리기 */
+}
 /* -------------------------------------------------------------------------- */
 /* 1. 배경 섹션 (전체 너비 100% 보장) */
+/* hero.css 혹은 index.css에 추가 */
+
 .hero-section {
   width: 100% !important; 
   height: 100vh;
@@ -279,127 +165,179 @@ button:focus-visible {
   align-items: center;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
-
 .hero-title {
-  font-size: clamp(40px, 3vw, 800px) ; 
+  font-size: clamp(40px, 5vw, 80px); 
   font-family: 'Times New Roman', serif;
-  color: #ff7a00; /* 오렌지색 강제 적용 */
+  color: #ff7a00; 
   margin-bottom: 60px;
   position: relative;
   font-weight: 900;
 }
 
-/* 오렌지 밑줄 */
 .hero-title::after {
   content: "";
   position: absolute;
   bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px; /* 글자가 커졌으니 선도 길게 */
+  width: 150px;
   height: 6px;
   background: #ff7a00 !important;
 }
 
-/* 3. 서브 텍스트 */
 .hero-subtitle {
   color: white !important;
-  font-size: 2.3rem;
-  margin-bottom: 15px;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
   line-height: 1.4;
   font-family: 'Times New Roman', 'Noto Serif KR', serif;
 }
 
+/* 🔥 하단 문구: 얇고 넓은 자간으로 세련미 강조 */
 .hero-description {
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 1rem;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Pretendard', sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75) !important;
+  letter-spacing: 0.03em; /* 자간을 살짝 벌려줌 */
+  margin-top: 10px;
+}
+
+.hero-description span {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 /* ---------------------------------------------------------------------------- */
 
-/* 제품 섹션 배경 및 여백 */
+/* ProductSection 전용 스타일 */
+
 .product-section {
   position: relative;
-  width: 100%; /* 이제 100vw 대신 100%만 써도 됩니다 */
-  padding: 100px 0; /* 위아래 여백만 주고 좌우 패딩은 컨테이너에 맡김 */
-  background-color: #dfd7d7; 
+  width: 100%;
+  padding: 120px 20px;
+  background-color: #f4f1ee; /* 조금 더 밝고 깨끗한 톤으로 보정 */
   background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
   display: flex;
   flex-direction: column;
-  align-items: center; /* 자식 요소들을 가로 중앙으로 */
+  align-items: center;
   overflow: hidden;
 }
 
+/* 배경 장식 텍스트 */
 .product-section::before {
-  content: 'JEJU'; /* 글자로 테스트 */
+  content: 'JEJU';
   position: absolute;
-  top: 50px;
-  left: 10px;
-  font-size: 150px;
+  top: 80px;
+  left: -20px;
+  font-size: 200px;
   font-weight: 900;
   color: #2D5A27;
-  opacity: 0.05; /* 아주 연하게 해서 자투리 공간 채우기 */
-  transform: rotate(-10deg);
+  opacity: 0.03;
+  transform: rotate(-5deg);
   pointer-events: none;
 }
 
-/* 카드 스타일: 가로 배치 */
+/* 섹션 헤더 스타일 */
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+  z-index: 1;
+}
+
+.section-badge {
+  display: inline-block;
+  color: #ff7a00;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 42px;
+  color: #2D5A27;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+/* 카드 컨테이너 */
+.product-list-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* 카드 사이 간격 확보 */
+}
+
+/* 개별 카드 스타일 */
 .product-card {
   display: flex;
-  align-items: flex-start; /* 상단 정렬 */
-  margin-bottom: 25px;
-  border-radius: 12px;
-  overflow: hidden; /* 이미지가 튀어나오지 않게 */
-  box-shadow: 0 10px 40px rgba(0,0,0,0.07);
-  transition: all 0.3s ease;
-  padding: 50px; /* 카드 안쪽 전체 여백 */
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255, 210, 160, 0.08), transparent 60%),
-    #FFF6EB;
+  align-items: center; /* 이미지와 텍스트를 수평 중앙 정렬 */
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(0,0,0,0.03);
 }
 
 .product-card:hover {
-  transform: translateX(10px); /* 호버 시 옆으로 살짝 미는 효과 */
+  transform: translateY(-10px); /* 옆이 아닌 위로 살짝 뜨는 효과가 더 세련됨 */
+  box-shadow: 0 25px 60px rgba(45, 90, 39, 0.1);
 }
 
-/* 사진 영역: 크기를 제한해서 왼쪽으로 밀기 */
+/* 이미지 영역 */
 .product-image-side {
-  width: 400px; /* 사진 크기를 여기서 조절하세요 */
+  width: 350px;
   height: 250px;
-  flex-shrink: 0; /* 사진이 찌그러지지 않게 고정 */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 18px;
 }
 
 .product-image-side img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 사진이 비율에 맞춰 꽉 차게 */
-  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-/* 텍스트 영역: 남은 공간 모두 차지 */
+.product-card:hover .product-image-side img {
+  transform: scale(1.08); /* 호버 시 이미지 미세하게 확대 */
+}
+
+/* 텍스트 영역 */
 .product-text-side {
-  padding: 0 40px;
-  flex-grow: 1;
-  text-align: left;
+  padding-left: 50px;
+  flex: 1;
+}
+
+.product-category {
+  font-size: 13px;
+  color: #ff7a00;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .product-text-side h3 {
-  font-family: 'Times New Roman', 'Noto Serif KR', serif;
-  font-size: 32px;    /* 제목 크기 확장 */
-  font-weight: 700;
-  color: #2D5A27;    /* 귤잎 색상 */
-  margin: 0 0 20px 0; /* 위쪽 여백은 0, 아래쪽만 20px */
+  font-size: 34px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Noto Serif KR', serif;
 }
 
-.product-text-side p {
-  font-size: 18px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: #444;
+.product-description {
+  font-size: 17px;
+  color: #666;
   line-height: 1.8;
-  margin: 0;         /* 기본 마진 제거 */
   word-break: keep-all;
   white-space: pre-wrap;
 }
@@ -480,57 +418,79 @@ button:focus-visible {
 
 /*---------------------------------------------------  */
 
+/* Footer.css */
+
 .footer {
-  background-color: #2D5A27; /* 아까 쓴 나뭇잎색과 통일감 */
-  color: rgba(255, 255, 255, 0.8);
-  padding: 60px 5% 40px;
+  background-color: #2D5A27; /* 제주 귤잎색 */
+  color: rgba(255, 255, 255, 0.7); /* 기본 글자는 부드러운 흰색 */
+  padding: 80px 5% 50px;
+  margin-top: auto; /* 페이지 하단 고정 */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: auto; /* 상단 콘텐츠가 짧아도 바닥에 고정되게 함 */
-  position: relative; /* 고정(fixed)되어 있다면 해제 */
-  z-index: 10;
 }
 
 .footer-container {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
+  /* 반응형: 화면이 좁아지면 자동으로 세로로 정렬 */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 50px;
 }
 
+/* 1. 브랜드 섹션 */
 .footer-logo {
-  color: #ff7a00;
-  font-size: 24px;
-  margin-bottom: 20px;
+  color: #ff7a00; /* 오렌지 포인트 */
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 25px;
 }
 
+.footer-slogan {
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 2. 고객센터 섹션 */
 .footer-info h3 {
   color: white;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-bottom: 20px;
 }
 
 .footer-info .phone {
-  font-size: 24px;
-  font-weight: 700;
-  color: #ff7a00;
-  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff; /* 번호는 눈에 띄게 흰색 */
+  margin-bottom: 12px;
 }
 
+.footer-info p {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 300;
+}
+
+/* 3. 사업자 정보 섹션 */
 .footer-details p {
   font-size: 13px;
-  line-height: 1.8;
-  margin: 0;
+  line-height: 2;
+  font-weight: 200; /* 정보 영역은 가늘게 처리하여 세련미 강조 */
+  margin-bottom: 4px;
 }
 
+/* 하단 저작권 표시 */
 .copyright {
-  margin-top: 20px !important;
-  opacity: 0.5;
+  margin-top: 30px !important;
+  font-size: 12px !important;
+  opacity: 0.4;
+  font-weight: 200;
 }
 
-* --- 로그인 버튼 전용 스타일 --- */
-.login-item {
-  margin-left: 20px; /* 주문 메뉴와 간격 벌리기 */
-}
 
 

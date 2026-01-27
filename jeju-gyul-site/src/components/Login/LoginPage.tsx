@@ -2,33 +2,50 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../loginpage.css';
 
-// 1. interface는 컴포넌트 함수 밖(위쪽)으로 꺼내야 합니다.
 interface LoginPageProps {
   onLoginSuccess: () => void;
 }
 
-// 2. 함수의 인자값으로 { onLoginSuccess }를 명시해줍니다.
 export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 🔥 핵심: await를 쓰기 위해 함수 앞에 async를 붙였습니다.
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // 3. 로그인이 성공했다고 치고, 부모(App.tsx)의 함수를 실행합니다.
-    onLoginSuccess(); 
-    
-    // 4. 메인 페이지로 이동시킵니다.
-    navigate('/'); 
-    
-    console.log("로그인 성공 처리됨:", formData);
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // 부모 컴포넌트(App.tsx)의 로그인 상태를 변경합니다.
+        onLoginSuccess(); 
+        navigate('/');
+        alert(`${data.userName}님, 제주 귤 농장에 오신 걸 환영합니다!`);
+      } else {
+        // 서버에서 보낸 에러 메시지(비번 틀림 등)를 띄웁니다.
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("로그인 요청 중 오류 발생:", error);
+      alert("서버와 통신할 수 없습니다. 서버(Node.js)가 켜져 있는지 확인해 주세요!");
+    }
   };
 
   return (
     <div className="login-page-container">
       <div className="login-card">
         <div className="login-header">
-          <h2 onClick={() => navigate('/')} style={{cursor:'pointer'}}>🍊 JEJU GYUL</h2>
+          {/* 로고 클릭 시 메인으로 이동 */}
+          <h2 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+            🍊 JEJU GYUL
+          </h2>
           <p>반가워요! 로그인이 필요해요.</p>
         </div>
 
@@ -38,7 +55,8 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
             <input 
               type="email" 
               placeholder="example@gyul.com"
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
@@ -48,7 +66,8 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
             <input 
               type="password" 
               placeholder="비밀번호를 입력하세요"
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               required
             />
           </div>
@@ -57,8 +76,8 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
         </form>
 
         <div className="login-helper">
-          <button onClick={() => navigate('/signup')}>회원가입</button>
-          <button>비밀번호 찾기</button>
+          <button type="button" onClick={() => navigate('/signup')}>회원가입</button>
+          <button type="button">비밀번호 찾기</button>
         </div>
 
         <div className="social-login-group">

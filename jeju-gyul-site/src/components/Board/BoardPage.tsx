@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../board.css';
 
 interface Post {
@@ -13,12 +13,22 @@ export default function BoardPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const navigate = useNavigate();
 
+  // 🔥 DB에서 데이터를 가져오는 함수
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/posts');
+      if (!response.ok) throw new Error('데이터 로드 실패');
+      
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error("게시판 로드 중 오류:", error);
+      alert("게시글을 불러올 수 없습니다.");
+    }
+  };
+
   useEffect(() => {
-    const mockData = [
-      { id: 1, title: '제주 한라봉 진짜 맛있네요!', author: '귤조아', date: '2024-05-20' },
-      { id: 2, title: '배송 언제 오나요?', author: 'ㅁㄴㅇ', date: '2024-05-21' },
-    ];
-    setPosts(mockData);
+    fetchPosts();
   }, []);
 
   return (
@@ -35,16 +45,22 @@ export default function BoardPage() {
           </tr>
         </thead>
         <tbody>
-          {posts.map(post => (
-            <tr key={post.id} onClick={() => navigate(`/board/${post.id}`)}>
-              <td>{post.id}</td>
-              <td className="title-cell">
-                {post.title}
+          {posts.length > 0 ? (
+            posts.map(post => (
+              <tr key={post.id} onClick={() => navigate(`/board/${post.id}`)}>
+                <td>{post.id}</td>
+                <td className="title-cell">{post.title}</td>
+                <td>{post.author}</td>
+                <td>{post.date}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} style={{ padding: '50px', color: '#999' }}>
+                등록된 게시글이 없습니다. 🍊
               </td>
-              <td>{post.author}</td>
-              <td>{post.date}</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

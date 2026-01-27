@@ -11,7 +11,7 @@ import Footer from './components/Footer/Footer'
 import OrderPage from './components/Order/OrderPage'
 import LoginPage from './components/Login/LoginPage';
 import BoardPage from './components/Board/BoardPage';
-import BoardDetail from './components/Board/BoardDetail'; // 상세 페이지 컴포넌트 임포
+import BoardDetail from './components/Board/BoardDetail'; 
 import BoardWrite from './components/Board/BoardWrite';
 
 function App() {
