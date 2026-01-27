@@ -27,7 +27,7 @@ const products: Product[] = [
 export default function ProductSection() {
   return (
     <section id="products" className="product-section">
-      {/* 아까 넣은 제목 멘트 부분 */}
+      {/*제목 멘트 부분 */}
       <div className="section-header">
         <span className="section-badge">Premium Jeju</span>
         <h2 className="section-title">자연이 빚은 제주의 맛</h2>

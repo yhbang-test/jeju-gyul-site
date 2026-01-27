@@ -2,7 +2,6 @@ import hisTory from '../../assets/history.jpg';
 
 export default function HeroSection() {
   return (
-    // 클래스명을 단순화합니다. (hero-section 하나만 사용)
     <section 
       id="home" 
       className="hero-section" 

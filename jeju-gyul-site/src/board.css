@@ -1,47 +1,91 @@
+/* board.css */
 .board-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 150px 20px 100px; /* 헤더 높이만큼 위 여백 */
+  padding: 150px 20px 120px; 
+  box-sizing: border-box;
+  min-height: calc(100vh - 350px); 
 }
 
 .board-container h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 800;
   color: #333;
+  margin-bottom: 40px;
 }
 
+/* 목록 테이블 */
 .board-table {
   width: 100%;
-  border-top: 2px solid #ff7a00;
   border-collapse: collapse;
+  background: white;
+  border-top: 2px solid #ff7a00;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .board-table th {
-  padding: 15px;
   background-color: #fffaf5;
-  border-bottom: 1px solid #ddd;
+  padding: 18px;
   font-weight: bold;
+  border-bottom: 1px solid #ddd;
 }
 
 .board-table td {
-  padding: 15px;
+  padding: 18px;
   border-bottom: 1px solid #eee;
-  color: #666;
-  transition: background 0.2s;
+  text-align: center;
+}
+
+.board-table .title-cell {
+  text-align: left;
+  padding-left: 30px;
 }
 
 .board-table tr:hover td {
   background-color: #fffcf9;
   color: #ff7a00;
+  cursor: pointer;
 }
 
-.write-btn {
-  background-color: #ff7a00;
-  color: white;
-  padding: 10px 25px;
-  border: none;
-  border-radius: 8px;
+/* 상세 보기 카드가 푸터와 너무 붙지 않게 함 */
+.write-form {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom: 20px; /* 푸터와 카드 사이 간격 */
+}
+
+.input-field, .textarea-field {
+  width: 100%;
+  padding: 15px;
+  border: 1.5px solid #eee;
+  border-radius: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.textarea-field {
+  height: 350px;
+  resize: none;
+}
+
+/* 공통 버튼 */
+.board-btn-group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 20px;
+  border: none;
 }
+
+.btn.primary { background: #ff7a00; color: white; }
+.btn.secondary { background: #eee; color: #666; }

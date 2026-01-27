@@ -1,29 +1,33 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color: #213547;
+  background-color: #ffffff;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  min-height: 100vh;
+}
+
+.order-page, 
+.login-page-container, 
+.board-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.write-form {
+  margin-bottom: 30px;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -60,176 +64,207 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 /* ---------------------------------------------------------------------------- */
 /* 전체 헤더 */
 
-/* --- 3. 기존 헤더 스타일 보완 --- */
-/* 고정 헤더 때문에 섹션 제목이 가려지는 것 방지 */
-section {
-  scroll-margin-top: 70px; /* 헤더 높이(70px)만큼 여유 공간 확보 */
-}
+/* --- 1. 헤더 전체 컨테이너 (정렬의 기준) --- */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
-
-  /* flex로 변경하여 양 끝으로 배치 */
+  height: 80px; /* 고정 높이 */
   display: flex;
-  justify-content: space-between; 
-  align-items: center;
-
-  /* 좌우 여백을 줘서 로고와 버튼이 벽에 딱 붙지 않게 조절 */
-  padding: 0 5%; 
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  justify-content: space-between;
+  align-items: center; /* 모든 요소를 세로 중앙으로 */
+  padding: 0 4.5%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   z-index: 1000;
-  box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+  box-sizing: border-box;
 }
 
-.header-left, .header-right {
-  flex: 1;
-  display: flex;
+/* --- 2. 로고 영역 --- */
+.header-logo a {
+  text-decoration: none;
+  color: #2D5A27; /* 진한 숲색 */
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
-.header-right {
-  justify-content: flex-end; /* 로그인 버튼을 오른쪽 끝으로 */
+.header-logo span {
+  color: #ff7a00; /* GYUL 오렌지 포인트 */
 }
 
-/* 로고 */
-.header-logo {
-  font-size: 24px;       /* 22 → 24 */
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #ff7a00;
-}
-
-/* nav 전체 */
+/* --- 3. 네비게이션 메뉴 영역 --- */
 .header-nav {
-  flex: 2; /* 메뉴가 가운데에 오도록 비율 조정 */
   display: flex;
-  justify-content: center;
-}
-
-.header-nav a {
-  text-decoration: none;  /* 밑줄 제거 */
-  color: inherit;         /* 부모(li) 색상 따라가기 */
-  display: block;         /* 클릭 영역을 넓게 */
-  width: 100%;
+  align-items: center;
+  height: 100%;
 }
 
 .header-nav ul {
   display: flex;
-  gap: 50px;
+  align-items: center;
+  gap: 45px;
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
-/* 1차 메뉴 */
 .header-nav > ul > li {
-  position: relative;
-  font-size: 16px;          /* 🔥 기존 15 → 16 */
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative; /* 드롭다운의 기준점 */
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: 0.0.3em;   /* 🔥 글자 간격 */
-  color: #222;
-  cursor: pointer;
-  transition: color 0.3s ease; /* 부드러운 색상 변경을 위해 추가 */
+  color: #444;
+  transition: color 0.2s ease;
 }
 
-/* hover 시 컬러 */
+.header-nav > ul > li a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 .header-nav > ul > li:hover {
-  color: #2D5A27;
+  color: #ff7a00;
 }
 
-/* 2차 메뉴 */
-.header-nav ul li ul {
+/* --- 4. 드롭다운 라벨 및 화살표 --- */
+.dropdown-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-label::after {
+  content: '▾';
+  font-size: 10px;
+  margin-left: 5px;
+  opacity: 0.5;
+}
+
+/* --- 5. 드롭다운 메뉴 (세로 정렬 및 깨짐 방지 핵심) --- */
+.dropdown-menu {
   position: absolute;
-  top: 100%;
-  left: 0;
-  background: #ffffffef;
-  padding: 12px 0;
-  min-width: 160px;
+  /* 부모 li가 height 100%(80px)이므로 top 100%를 주면 정확히 헤더 아래에 붙습니다 */
+  top: 100%; 
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: white;
+  
+  /* 내부 아이템 세로 정렬 */
+  display: flex;
+  
+  min-width: 150px; /* 글자가 갇히지 않게 충분한 너비 확보 */
+  padding: 10px 0;
   border-radius: 12px;
-  border-top: 3px solid #446140;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  list-style: none;
-  display: block;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  
   opacity: 0;
-  transform: translateY(10px);
   pointer-events: none;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 1001;
 }
 
-/* hover 시 드롭다운 표시 */
-.header-nav ul li:hover ul {
+/* 호버 시 드롭다운 표시 */
+.dropdown:hover .dropdown-menu {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
-/* 드롭다운 아이템 */
-.header-nav ul li ul li {
-  padding: 12px 28px;      /* 여백 증가 */
-  font-size: 14px;        /* 기존보다 살짝 크게 */
-  letter-spacing: 0.03em; /* 통일감 */
-  color: #444;
-  white-space: nowrap;
-  text-align: left;
-  transition: all 0.2s ease;
-}
-
-.header-nav ul li ul li:hover {
-  background: #f0f5ee;
-  color: #2D5A27;
-}
-
-/* '소통해요' 메뉴와 서브메뉴 사이의 다리 역할 (선택사항이지만 추천) */
-.header-nav ul li.dropdown::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 0;
+.dropdown-menu li {
   width: 100%;
-  height: 15px;
+  list-style: none;
 }
-/* 로그인 로그아웃 */
-.user-info {
+
+.dropdown-menu li a {
+  display: block; /* 전체 영역 클릭 */
+  padding: 12px 20px;
+  font-size: 15px;
+  color: #666;
+  text-decoration: none;
+  text-align: center;
+  
+  /* 🔥 핵심: 글자 꺾임 방지 */
+  white-space: nowrap; 
+  transition: all 0.2s;
+}
+
+.dropdown-menu li a:hover {
+  background: #fff5eb;
+  color: #ff7a00;
+  font-weight: 700;
+}
+
+/* --- 6. 오른쪽 사용자 영역 (로그인/로그아웃) --- */
+.header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
 }
 
 .welcome-msg {
   font-size: 14px;
-  color: #333;
+  color: #666;
+  margin-right: 15px;
+}
+
+.welcome-msg strong {
+  color: #222;
+  font-weight: 700;
 }
 
 .logout-btn {
-  background: none;
-  border: 1px solid #ddd;
-  padding: 5px 12px;
-  border-radius: 5px;
+  background: #f5f5f5;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 10px;
   font-size: 12px;
+  font-weight: 600;
+  color: #888;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .logout-btn:hover {
-  background: #f5f5f5;
+  background: #ffebe6;
+  color: #ff4d4d;
+}
+
+.login-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 날씬하고 세련된 높이 40px */
+  height: 40px; 
+  padding: 0 25px; 
+  
+  background: #ff7a00;
+  color: white !important;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.15);
+  white-space: nowrap;
+}
+
+.login-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -246,9 +281,8 @@ section {
   padding: 0;
 }
 
-/* 2. 타이틀 (색상이 안 먹는다면 !important 추가) */
+
 .hero-title {
-  /* 80px보다 더 크게 보고 싶다고 하셨으니 120px로 설정 */
   font-size: clamp(40px, 3vw, 800px) ; 
   font-family: 'Times New Roman', serif;
   color: #ff7a00; /* 오렌지색 강제 적용 */
@@ -451,6 +485,9 @@ section {
   color: rgba(255, 255, 255, 0.8);
   padding: 60px 5% 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto; /* 상단 콘텐츠가 짧아도 바닥에 고정되게 함 */
+  position: relative; /* 고정(fixed)되어 있다면 해제 */
+  z-index: 10;
 }
 
 .footer-container {
@@ -496,30 +533,4 @@ section {
   margin-left: 20px; /* 주문 메뉴와 간격 벌리기 */
 }
 
-/* 로그인 버튼 스타일 유지 및 추가 */
-.login-link {
-  background-color: #ff7a00;
-  color: white !important;
-  padding: 10px 25px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-}
 
-.login-link:hover {
-  background-color: #e66e00; /* 호버 시 조금 더 진한 오렌지 */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(255, 122, 0, 0.3);
-}
-
-/* 기존 nav ul gap 조정 (로그인 버튼이 들어갔으므로 조금 좁혀도 예쁩니다) */
-.header-nav ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}

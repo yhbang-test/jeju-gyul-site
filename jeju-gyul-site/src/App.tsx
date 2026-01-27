@@ -11,6 +11,8 @@ import Footer from './components/Footer/Footer'
 import OrderPage from './components/Order/OrderPage'
 import LoginPage from './components/Login/LoginPage';
 import BoardPage from './components/Board/BoardPage';
+import BoardDetail from './components/Board/BoardDetail'; // 상세 페이지 컴포넌트 임포
+import BoardWrite from './components/Board/BoardWrite';
 
 function App() {
   const [userName, setUserName] = useState<string | null>(null);
@@ -39,6 +41,8 @@ function App() {
           </>
         }/>
         <Route path="/board" element={<BoardPage />} />
+        <Route path="/board/:id" element={<BoardDetail />} />
+        <Route path="/board/write" element={<BoardWrite />} />
         {/* 3. 주문 페이지 */}
         <Route path="/order" element={<OrderPage userName={userName} />} />
         {/* 4. 로그인 페이지 (함수 전달) */}

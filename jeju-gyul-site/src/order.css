@@ -1,86 +1,238 @@
-:root{
-  /* 1. 폰트 설정 (Pretendard: 깔끔하고 가독성 좋음) */
-/* @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');   */
-}
+/* 1. 페이지 전체 레이아웃 */
 .order-page {
-  padding: 120px 20px;
-  background-color: #84c882;
+  padding: 150px 20px 100px;
+  background-color: #FFFAF5; /* 따뜻하고 깨끗한 상아색 배경 */
   min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
 }
 
-.order-header { text-align: center; margin-bottom: 50px; }
-.order-header h1 { font-size: 3rem; color: #333; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+/* 2. 헤더 섹션 */
+.order-page {
+  padding: 150px 20px 100px;
+  /* 배경: 왼쪽 위(진한 싱그러움)에서 오른쪽 아래(밝은 화사함)로 퍼지는 그라데이션 
+     #e8f5e9: 아주 연한 민트그린 / #fffaf5: 따뜻한 상아색
+  */
+  background: linear-gradient(145deg, #e8f5e9 0%, #fffaf5 50%, #ffffff 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Pretendard', sans-serif;
+  
+  /* 배경에 아주 미세한 나뭇잎 패턴이나 질감을 주고 싶을 때 추가 (선택사항) */
+  background-attachment: fixed;
+}
 
+/* 2. 헤더 글자색 보강 (밝은 배경에서 더 잘 보이도록) */
+.order-header h1 {
+  font-size: 2.8rem;
+  color: #1b5e20; /* 더 진한 숲색으로 변경하여 대비를 높임 */
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05); /* 글자에 미세한 그림자 */
+  margin-bottom: 10px;
+}
+
+.order-header p {
+  color: #446140;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* 3. 섹션 카드(form-group)가 배경과 더 대비되도록 그림자 강화 */
 .form-group {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.95); /* 약간의 투명도 */
+  padding: 45px;
+  border-radius: 30px; /* 더 둥글게 해서 부드러운 느낌 */
+  margin-bottom: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  /* 그림자를 조금 더 선명하게 해서 공중에 뜬 느낌(입체감)을 줌 */
+  box-shadow: 0 20px 40px rgba(45, 90, 39, 0.08); 
+  border: 1px solid rgba(255, 255, 255, 1);
+  backdrop-filter: blur(10px); /* 배경과 섞이는 느낌 */
 }
 
-.form-group h3 { margin-bottom: 50px; 
-                 color: #2D5A27;
-                 font-size: 50px;
-                 text-align: center; 
-                 font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
+.form-group h3 {
+  margin-bottom: 35px;
+  color: #446140;
+  font-size: 24px;
+  font-weight: 700;
+  border-left: 6px solid #ff7a00;
+  padding-left: 15px;
+  text-align: left;
+}
 
-/* 큰 아이콘 카드 그리드 */
+/* 4. 상품 선택 그리드 */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  background-color: rgba(232, 231, 231, 0.875);
-  border-radius: 15px;
 }
 
 .product-card {
-  background: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 15px;
-  padding: 20px;
+  background: #fff;
+  border: 2px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 30px 20px;
   cursor: pointer;
-  transition: all 0.3s ease; /* 애니메이션 속도 */
-  
-  /* 부드러운 기본 그림자 */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
 }
 
-/* 2. 마우스를 올렸을 때(Hover) 그림자가 더 진해지는 효과 */
 .product-card:hover {
-  transform: translateY(-5px); /* 살짝 떠오르는 느낌 */
-  box-shadow: 0 15px 30px rgba(255, 122, 0, 0.15); /* 오렌지빛 도는 진한 그림자 */
+  transform: translateY(-8px);
   border-color: #ff7a00;
+  box-shadow: 0 15px 30px rgba(255, 122, 0, 0.1);
 }
 
-.product-card .product-icon { font-size: 50px; margin-bottom: 10px; }
 .product-card.active {
-  border: 2px solid #ff7a00;
-  box-shadow: 0 10px 25px rgba(255, 122, 0, 0.2);
+  background-color: #fff4e6;
+  border-color: #ff7a00;
+  position: relative;
 }
 
-/* 입력창 스타일 */
+.product-icon {
+  font-size: 55px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.product-info strong {
+  display: block;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.product-info span {
+  color: #ff7a00;
+  font-weight: 600;
+}
+
+/* 5. 용량 선택 및 가격 확인 영역 */
+.price-calculator {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kg-select {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  font-size: 16px;
+  outline: none;
+}
+
+.total-price-info span {
+  font-size: 18px;
+  color: #666;
+  margin-right: 15px;
+}
+
+.total-amount {
+  font-size: 28px;
+  color: #ff7a00;
+  font-weight: 800;
+}
+
+/* 6. 입력창 스타일 */
+.input-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .input-list input {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  padding: 18px;
+  border: 1.5px solid #eee;
+  border-radius: 14px;
+  font-size: 16px;
   box-sizing: border-box;
+  transition: all 0.2s;
 }
 
-/* 버튼 그룹 */
-.button-group { display: flex; gap: 15px; margin-top: 40px; }
+.input-list input:focus {
+  outline: none;
+  border-color: #ff7a00;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.05);
+}
+
+/* 7. 하단 버튼 영역 */
+.button-group {
+  max-width: 900px;
+  margin: 50px auto 0;
+  display: flex;
+  gap: 15px;
+}
 
 .order-btn {
   flex: 1;
-  padding: 20px;
-  border-radius: 15px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 22px;
+  border-radius: 18px;
+  font-size: 1.2rem;
+  font-weight: 800;
   cursor: pointer;
   border: none;
+  transition: all 0.3s;
 }
 
-.order-btn.primary { background: #ff7a00; color: white; }
-.order-btn.cancel { background: #eee; color: #666; }
+.order-btn.primary {
+  background: linear-gradient(135deg, #ff7a00 0%, #ff9500 100%);
+  color: white;
+  box-shadow: 0 10px 25px rgba(255, 122, 0, 0.25);
+}
+
+.order-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(255, 122, 0, 0.35);
+}
+
+.order-btn.cancel {
+  background: #f0f0f0;
+  color: #888;
+}
+
+/* 8. 주소 검색 모달 관련 */
+.address-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+}
+
+.address-modal {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+  padding: 20px;
+  background: #ff7a00;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.address-search-btn {
+  padding: 0 25px;
+  background: #2D5A27;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
