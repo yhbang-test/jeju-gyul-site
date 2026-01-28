@@ -113,3 +113,16 @@
 
 .social-btn.kakao { background: #FEE500; color: #3c1e1e; }
 .social-btn.naver { background: #03C75A; color: white; }
+
+.signup-card {
+  max-width: 450px !important; /* 가입폼은 조금 더 넓게 */
+  padding: 40px !important;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2D5A27; /* 제주 귤잎색 적용 */
+  margin-bottom: 8px;
+  display: block;
+}

@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer'
 import OrderPage from './components/Order/OrderPage'
 import LoginPage from './components/Login/LoginPage';
 import BoardPage from './components/Board/BoardPage';
+import SignupPage from './components/Login/SignupPage';
 import BoardDetail from './components/Board/BoardDetail'; 
 import BoardWrite from './components/Board/BoardWrite';
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/order" element={<OrderPage userName={userName} />} />
         {/* 4. 로그인 페이지 (함수 전달) */}
         <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginTest} />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
       {/* 5. 공통 푸터 */}
       <Footer />

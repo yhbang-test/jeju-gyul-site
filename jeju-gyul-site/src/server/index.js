@@ -1,24 +1,25 @@
-const express = require('express');
-const cors = require('cors');
-const db = require('./db');
-const app = express();
+import express from 'express';
+import cors from 'cors';
+import db from './db.js'; // db.js에서 export default pool 한 것을 가져옴
 
+const app = express();
 app.use(cors());
 app.use(express.json());
-
-/* 로그인 */
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   try {
+    // 💡 db.js가 promise 기반이므로 await 사용 가능
     const [rows] = await db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
     
     if (rows.length > 0) {
+      // 💡 테이블의 name 컬럼 값을 userName으로 응답
       res.json({ success: true, userName: rows[0].name });
     } else {
       res.status(401).json({ success: false, message: '정보가 일치하지 않습니다.' });
     }
   } catch (err) {
+    console.error(err);
     res.status(500).json({ success: false, message: '서버 오류' });
   }
 });
