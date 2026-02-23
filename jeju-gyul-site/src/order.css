@@ -1,83 +1,179 @@
-/* order.css 수정본 */
-
+/* order.css */
 .order-page {
-  padding: 100px 20px 100px; /* 상단 여백 조정 */
-  background: linear-gradient(145deg, #a2dca2 0%, #907a64 100%);
+  /* 상단 패딩을 100px 정도로 넉넉히 주어 여유 공간을 만듭니다 */
+  padding: 100px 20px 60px; 
+  background: #f8f9fa;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-.form-group {
+.container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.order-header h1 {
+  color: #2D5A27;
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+/* 섹션 공통 스타일 */
+.form-group.slim {
   background: white;
-  padding: 50px 45px; /* 세로 패딩 확장 */
-  border-radius: 30px;
-  margin-bottom: 40px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-/* 입력 리스트 간격 확장 */
-.input-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* 입력창 사이 간격 확대 */
+.section-title {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 20px;
+  border-left: 4px solid #ff7a00;
+  padding-left: 12px;
 }
 
-/* 성함, 연락처를 한 줄에 배치하고 싶을 때 */
-.input-row {
-  display: flex;
+/* 상품 카드 그리드 */
+.product-grid.slim {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-.input-row .order-input {
-  flex: 1;
-}
 
-.order-input {
-  width: 100%;
-  padding: 18px 22px;
-  border: 1.5px solid #463030;
+.product-card.slim {
+  padding: 20px;
+  border: 2px solid #eee;
   border-radius: 15px;
-  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
   transition: all 0.2s;
-  background-color: #fdfdfd;
+  background: #fff;
 }
 
-.order-input:focus {
+.product-card.slim.active {
   border-color: #ff7a00;
-  background-color: rgb(53, 37, 37);
-  box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.08);
+  background: #fff9f2;
+  transform: translateY(-5px);
 }
 
-/* 주소 입력창 강조 */
-.address-main {
-  background-color: #f5f5f5;
+.p-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+.p-info strong { display: block; font-size: 1.1rem; color: #333; }
+.p-info span { color: #666; font-size: 0.9rem; }
+
+/* 배송 정보 입력 */
+.input-list.slim { display: flex; flex-direction: column; gap: 15px; }
+.input-row { display: flex; gap: 10px; }
+.order-input {
+  flex: 1;
+  padding: 15px;
+  border: 1.5px solid #ddd;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+}
+.order-input:focus { border-color: #2D5A27; }
+
+.address-input-wrapper { display: flex; gap: 10px; }
+.address-main { background: #fdfdfd; cursor: pointer; }
+
+/* 주소 검색 버튼 스타일 추가 */
+.address-search-btn {
+  padding: 0 25px;            /* 좌우 여백 */
+  background-color: #2D5A27;  /* 제주 귤잎 색상 */
+  color: white;               /* 글자색 흰색 */
+  border: none;               /* 테두리 제거 */
+  border-radius: 12px;        /* 입력창과 통일감 있게 둥글게 */
+  font-weight: 700;           /* 글자 굵게 */
+  cursor: pointer;            /* 마우스 올리면 손가락 모양 */
+  white-space: nowrap;        /* 글자가 아래로 꺾이지 않게 */
+  transition: background 0.2s; /* 부드러운 색상 변화 */
+}
+
+.address-search-btn:hover {
+  background-color: #1e3d1a;  /* 마우스 올리면 조금 더 진한 녹색 */
+}
+
+/* 결제 요약 바 */
+.price-summary-bar {
+  background: #2D5A27;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.kg-select-slim {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  margin-left: 10px;  /* 🔥 왼쪽 글자와의 간격을 벌려줍니다 */
+}
+
+.total-text { font-size: 1.2rem; }
+.total-text strong { font-size: 1.5rem; color: #ffcc00; margin-left: 10px; }
+
+/* 버튼 그룹 */
+.button-group.slim { display: flex; gap: 15px; }
+.order-btn {
+  flex: 1;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
   cursor: pointer;
 }
+.order-btn.primary { background: #ff7a00; color: white; }
+.order-btn.cancel { background: #eee; color: #666; }
 
-/* 상세 주소창 스타일 (조금 더 강조) */
-.detail-address {
-  border-left: 4px solid #ff7a00; /* 왼쪽에 오렌지색 포인트 */
+/* 모달 스타일 */
+.address-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;
 }
+.address-modal {
+  background: white; width: 500px; border-radius: 20px; overflow: hidden;
+}
+.modal-header {
+  padding: 15px 20px; background: #2D5A27; color: white;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.modal-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+.postcode-wrapper { padding: 10px; }
 
-.address-input-wrapper {
+.payment-grid {
   display: flex;
   gap: 12px;
 }
 
-.address-search-btn {
-  padding: 0 30px;
-  background: #2D5A27;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: background 0.2s;
+.pay-btn {
+  flex: 1;
+  padding: 16px;
+  border: 1.5px solid #eee;
+  border-radius: 12px;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 15px;
 }
 
-.address-search-btn:hover {
-  background: #1e3d1a;
+.pay-btn.active {
+  border-color: #ff7a00;
+  background: #fff9f2;
+  color: #ff7a00;
 }
 
-/* 상품 카드 세로 길이 보정 */
-.product-card {
-  padding: 40px 20px; /* 카드 안쪽 세로 여백 확장 */
+/* 카카오 버튼 전용 색상 (원할 경우) */
+.pay-btn.active:first-of-type {
+  border-color: #ffcc00;
+  background: #fffef0;
+  color: #3c1e1e;
 }
